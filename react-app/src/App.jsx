@@ -53,31 +53,18 @@ function App() {
         )}
       </div>
 
+      <div className="my-6"></div>
+
+
+
+
       {/* Texto descriptivo */}
       <p className="mt-6 text-gray-700 text-center max-w-xl">
         Este flujo representa el CI/CD con <strong>GitHub Actions</strong> y
         despliegue automático en <strong>Google Cloud Run</strong>.
       </p>
 
-      <h2 className="text-3xl font-bold text-blue-600 mb-6 text-center">
-        Diagrama de flujo con Mermaid
-      </h2>
-
-
-      {/* Diagrama Mermaid */}
-      <div
-        ref={mermaidRef}
-        className="mt-10 w-full max-w-3xl bg-white p-4 rounded-lg shadow-md"
-      >
-        <div className="mermaid">
-          graph TD;
-            A[GitHub Push] --> B[GitHub Actions];
-            B --> C[Build Docker Image];
-            C --> D[Push to Artifact Registry];
-            B --> E[Deploy to Cloud Run];
-
-        </div>
-      </div>
+      
     </div>
   );
 }
