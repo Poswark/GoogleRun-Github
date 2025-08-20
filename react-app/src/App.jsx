@@ -74,8 +74,8 @@ function App() {
             A[GitHub Push] --> B[GitHub Actions];
             B --> C[Build Docker Image];
             C --> D[Push to Artifact Registry];
-            D --> E[Deploy to Cloud Run];
-            E --> F[App Running 🚀];
+            B --> E[Deploy to Cloud Run];
+
         </div>
       </div>
     </div>
