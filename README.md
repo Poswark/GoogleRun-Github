@@ -11,24 +11,29 @@ config:
   look: handDrawn
 ---
 flowchart TB
- subgraph subGraph0["GitHub Actions Pipeline"]
-        D["🧪 Run Tests"]
+  subgraph subGraph0["GitHub Actions Pipeline"]
         C["🔄 GitHub Actions Workflow"]
+        D["🧪 Run Tests"]
         E["🔨 Build Docker Image"]
-        F["🏷️ Tag & Push to Registry"]
-        G["☁️ Deploy to Cloud Run"]
+        F["🔍 Scan Image (Trivy)"]
+        G["🏷️ Tag & Push to Registry"]
+        H["☁️ Deploy to Cloud Run"]
   end
- subgraph subGraph1["Google Cloud Platform"]
-        H["🐳 Container Registry"]
-        I["🚀 Cloud Run Service"]
-        J["🌐 Public URL"]
+
+  subgraph subGraph1["Google Cloud Platform"]
+        I["🐳 Container Registry"]
+        J["🚀 Cloud Run Service"]
+        K["🌐 Public URL"]
   end
-    A["👨‍💻 Developer"] -- git push --> B["📁 GitHub Repository"]
-    B --> C
-    C --> D
-    D --> E
-    E --> F
-    F --> G & H
-    G --> I
-    I --> J
-    K["👥 Users"] -- HTTPS requests --> J
+
+  A["👨‍💻 Developer"] -- git push --> B["📁 GitHub Repository"]
+  B --> C
+  C --> D
+  D --> E
+  E --> F
+  F --> G
+  F --> H
+  G --> I
+  I --> J
+  J --> K
+  L["👥 Users"] -- HTTPS requests --> K
