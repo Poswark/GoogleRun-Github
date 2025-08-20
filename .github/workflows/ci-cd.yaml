@@ -4,11 +4,10 @@ on:
     branches: [ "trunk" ]
 
 env:
-  PROJECT_ID: ${{ env.PROJECT_ID}}
   REGION: us-central1
   IMAGE_NAME: web-google-run
   IMAGE_VERSION: v1.0.${{ github.run_number }}
-  PATH_IMAGE: ${{ env.REGISTRYGCP }}/web-google-run
+  PATH_IMAGE: northamerica-south1-docker.pkg.dev/rapid-access-376101/mi-repo/web-google-run
   SERVICE: web-google-run
   REPO: web-google-run
 
