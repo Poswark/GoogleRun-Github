@@ -30,13 +30,13 @@ jobs:
     - name: Configurar SDK de Google Cloud
       uses: google-github-actions/setup-gcloud@v2
       with:
-        project_id: ${{ secrets.PROJECT_ID }}
+        project_id: ${{ env.PROJECT_ID }}
 
     - name: Configurar Docker para Artifact Registry
       run: gcloud auth configure-docker northamerica-south1-docker.pkg.dev --quiet
 
     - name: Build the Docker image
-      run: docker build -f ${{ env.DOCKERFILE }} -t ${{ env.PATH_IMAGE }}:${{ env.IMAGE_VERSION }} . --no-cache 
+      run: docker build -f ${{ env.DOCKERFILE }}  -t ${{ env.PATH_IMAGE }}:${{ env.IMAGE_VERSION }} . --no-cache 
 
     - name: Install Trivy
       run: |
@@ -73,7 +73,7 @@ jobs:
     - name: Configurar SDK de Google Cloud
       uses: google-github-actions/setup-gcloud@v2
       with:
-          project_id: ${{ secrets.PROJECT_ID }}
+          project_id: ${{ env.PROJECT_ID }}
 
     - name: Configurar Docker para Artifact Registry
       run: gcloud auth configure-docker northamerica-south1-docker.pkg.dev --quiet
@@ -81,7 +81,7 @@ jobs:
     - name: Deploy to Cloud Run
       run: |
         gcloud run deploy ${{ env.SERVICE }} \
-          --project=${{ secrets.PROJECT_ID }} \
+          --project=${{ env.PROJECT_ID }} \
           --region=us-central1 \
           --image=${{ env.PATH_IMAGE }}:${{ env.IMAGE_VERSION }} \
           --platform=managed \
