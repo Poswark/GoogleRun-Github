@@ -1,7 +1,7 @@
 
 # 🚀 Google Cloud Run, GitHub Actions y Mermaid son claves en tu estrategia DevOps
 
-[![CI/CD](https://github.com/Poswark/GoogleRun-Github/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Poswark/GoogleRun-Github/actions/workflows/ci-cd.yml)[![Deploy to Cloud Run](https://github.com/Poswark/GoogleRun-Github/actions/workflows/deploy.yml/badge.svg)](https://github.com/Poswark/GoogleRun-Github/actions/workflows/deploy.yml)
+[![CI/CD](https://github.com/Poswark/GoogleRun-Github/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/Poswark/GoogleRun-Github/actions/workflows/ci-cd.yaml)[![Deploy to Cloud Run](https://github.com/Poswark/GoogleRun-Github/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/Poswark/GoogleRun-Github/actions/workflows/deploy.yaml)
 
 
 
