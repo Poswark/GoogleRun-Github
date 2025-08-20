@@ -1,0 +1,49 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+    text-align: center;
+    padding: 40px;
+  }
+  
+  /* Estilos para los títulos */
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2563eb; /* azul Google */
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  /* Párrafos */
+  p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 25px;
+  }
+  
+  /* Imagen / GIF */
+  img {
+    max-width: 320px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  }
