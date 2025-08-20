@@ -1,5 +1,4 @@
-# Ready-GitHub-Actions-Cloud-Run-Mermaid
-Nunca fue tan fácil !
+
 # React + GitHub Actions → Cloud Run
 
 Demo: despliegue continuo a Cloud Run sirviendo una app React estática con NGINX.
