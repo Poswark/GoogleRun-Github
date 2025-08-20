@@ -32,8 +32,8 @@ flowchart TB
   D --> E
   E --> F
   F --> G
-  F --> H
+  C --> H
   G --> I
-  I --> J
+  H --> J
   J --> K
   L["👥 Users"] -- HTTPS requests --> K
