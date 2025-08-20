@@ -30,7 +30,7 @@ jobs:
     - name: Configurar SDK de Google Cloud
       uses: google-github-actions/setup-gcloud@v2
       with:
-        project_id: ${{ env.PROJECT_ID }}
+        project_id: ${{ secrets.PROJECT_ID }}
 
     - name: Configurar Docker para Artifact Registry
       run: gcloud auth configure-docker northamerica-south1-docker.pkg.dev --quiet
@@ -73,7 +73,7 @@ jobs:
     - name: Configurar SDK de Google Cloud
       uses: google-github-actions/setup-gcloud@v2
       with:
-          project_id: ${{ env.PROJECT_ID }}
+          project_id: ${{ secrets.PROJECT_ID }}
 
     - name: Configurar Docker para Artifact Registry
       run: gcloud auth configure-docker northamerica-south1-docker.pkg.dev --quiet
@@ -81,7 +81,7 @@ jobs:
     - name: Deploy to Cloud Run
       run: |
         gcloud run deploy ${{ env.SERVICE }} \
-          --project=${{ env.PROJECT_ID }} \
+          --project=${{ secrets.PROJECT_ID }} \
           --region=us-central1 \
           --image=${{ env.PATH_IMAGE }}:${{ env.IMAGE_VERSION }} \
           --platform=managed \
