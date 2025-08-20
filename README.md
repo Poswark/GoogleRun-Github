@@ -1,5 +1,10 @@
 
-# React + GitHub Actions → Cloud Run
+# 🚀 Google Cloud Run, GitHub Actions y Mermaid son claves en tu estrategia DevOps
+
+[![CI/CD](https://github.com/<TU_USUARIO>/<TU_REPO>/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/<TU_USUARIO>/<TU_REPO>/actions/workflows/ci-cd.yml)
+[![Deploy to Cloud Run](https://github.com/<TU_USUARIO>/<TU_REPO>/actions/workflows/deploy.yml/badge.svg)](https://github.com/<TU_USUARIO>/<TU_REPO>/actions/workflows/deploy.yml)
+
+
 
 Demo: despliegue continuo a Cloud Run sirviendo una app React estática con NGINX.
 
@@ -37,3 +42,13 @@ flowchart TB
   H --> J
   J --> K
   L["👥 Users"] -- HTTPS requests --> K
+
+```
+
+### Combinación de Google Cloud Run + GitHub Actions + Mermaid ofrece:
+
+* Menores costos operativos gracias al modelo serverless de Cloud Run
+* Automatización y seguridad en despliegues con GitHub Actions.
+* Documentación viva y clara con Mermaid.
+
+En un mundo donde la velocidad de entrega y la eficiencia económica son claves, esta tríada se convierte en un estándar recomendado para cualquier equipo DevOps moderno.
