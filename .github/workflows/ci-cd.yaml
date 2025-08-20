@@ -1,0 +1,93 @@
+name: CI/CD Github -> Cloud Run
+on:
+  push:
+    branches: [ "trunk" ]
+
+env:
+  PROJECT_ID: ${{ env.PROJECT_ID}}
+  REGION: us-central1
+  IMAGE_NAME: web-google-run
+  IMAGE_VERSION: v1.0.${{ github.run_number }}
+  PATH_IMAGE: ${{ env.REGISTRYGCP }}/web-google-run
+  SERVICE: web-google-run
+  REPO: web-google-run
+
+jobs:
+
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set Docker image version
+      id: vars
+      run: echo "IMAGE_VERSION=v1.0.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+
+    - name: Authenticate to GCP
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    - name: Configurar SDK de Google Cloud
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+        project_id: ${{ env.PROJECT_ID }}
+
+    - name: Configurar Docker para Artifact Registry
+      run: gcloud auth configure-docker northamerica-south1-docker.pkg.dev --quiet
+
+    - name: Build the Docker image
+      run: docker build -t ${{ env.PATH_IMAGE }}:${{ env.IMAGE_VERSION }} . --no-cache 
+
+    - name: Install Trivy
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget
+        wget https://github.com/aquasecurity/trivy/releases/download/v0.40.0/trivy_0.40.0_Linux-64bit.deb
+        sudo dpkg -i trivy_0.40.0_Linux-64bit.deb
+
+    - name: Scan Docker image with Trivy
+      run: |
+        # Escanea la imagen en busca de vulnerabilidades y falla si encuentra de nivel HIGH o CRITICAL
+        trivy image --severity HIGH,CRITICAL --ignore-unfixed --scanners vuln ${{ env.PATH_IMAGE }}:${{ env.IMAGE_VERSION }}
+        # trivy image --exit-code 1 --severity HIGH,CRITICAL --ignore-unfixed  --scanners vuln ${{ env.PATH_IMAGE }}:${{ env.IMAGE_VERSION }}
+
+    - name: Push Docker image to Artifact Registry
+      run: docker push ${{ env.PATH_IMAGE }}:${{ env.IMAGE_VERSION }}
+    
+
+  cd:
+    needs: ci  # <- espera a que el job "ci" termine OK
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set Docker image version
+      id: vars
+      run: echo "IMAGE_VERSION=v1.0.${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+
+    - name: Authenticate to GCP
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    - name: Configurar SDK de Google Cloud
+      uses: google-github-actions/setup-gcloud@v2
+      with:
+          project_id: ${{ env.PROJECT_ID }}
+
+    - name: Configurar Docker para Artifact Registry
+      run: gcloud auth configure-docker northamerica-south1-docker.pkg.dev --quiet
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy ${{ env.SERVICE }} \
+          --project=${{ env.PROJECT_ID }} \
+          --region=us-central1 \
+          --image=${{ env.PATH_IMAGE }}:${{ env.IMAGE_VERSION }} \
+          --platform=managed \
+          --memory=512Mi \
+          --cpu=1 \
+          --max-instances=2 \
+          --concurrency=80 \
+          --timeout=300 \
+          --allow-unauthenticated
